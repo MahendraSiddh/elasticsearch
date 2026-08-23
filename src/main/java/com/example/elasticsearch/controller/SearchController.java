@@ -1,5 +1,6 @@
 package com.example.elasticsearch.controller;
 
+import com.example.elasticsearch.dto.FacetResultDto;
 import com.example.elasticsearch.model.ProductDocument;
 import com.example.elasticsearch.service.ProductSearchService;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +42,10 @@ public class SearchController {
             @RequestParam(required = false) Double minPrice,
             @RequestParam(required = false) Double maxPrice) {
         return ResponseEntity.ok(productSearchService.searchByCategoryAndPriceRange(category, minPrice, maxPrice));
+    }
+
+    @GetMapping("/facets")
+    public ResponseEntity<FacetResultDto> getCategoryAndBrandFacets() {
+        return ResponseEntity.ok(productSearchService.getCategoryAndBrandFaceting());
     }
 }
